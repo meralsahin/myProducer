@@ -8,6 +8,9 @@ public class NameDateIpUaId {
 	private String myIP;
 	private String myUserAgent;
 	private String myGUID;
+	public NameDateIpUaId() {
+		super();
+	}
 	public NameDateIpUaId(String myname, Date mydate, String myIP,
 			String userAgent) {
 		super();
