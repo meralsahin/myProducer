@@ -49,6 +49,7 @@
 	</dependencies>
 
 	<build>
+	<pluginManagement>
 		<plugins>
 			<!-- Mandatory plugins for using Spock -->
 			<plugin>
@@ -136,8 +137,7 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
 		</plugins>
+		</pluginManagement>
 	</build>
 </project>
