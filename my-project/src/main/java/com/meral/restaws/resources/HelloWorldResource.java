@@ -43,6 +43,8 @@ public class HelloWorldResource {
 			numberOfAvailableShards * partitionKeysPerShard;
 
 	private final ObjectMapper JSON = new ObjectMapper();
+	
+//	private KinesisProducer kp  = new KinesisProducer();
 
 	private int requestCounter = 0;
 
@@ -58,7 +60,6 @@ public class HelloWorldResource {
 			@HeaderParam("User-Agent") String userAgent,
 			@Context HttpServletRequest request) throws JsonProcessingException {
 		KinesisProducer kp  = new KinesisProducer();
-
 		//3- it receives the request status (failure or success) from kinesis
 		FutureCallback<UserRecordResult> myCallback = 
 				new FutureCallback<UserRecordResult>() {     
@@ -81,7 +82,7 @@ public class HelloWorldResource {
 		//1-sends the datum
 		ListenableFuture<UserRecordResult> f = kp.addUserRecord("my_kinesis_stream", String.valueOf(partitonKeysToUse % requestCounter++), 
 				ByteBuffer.wrap(bytes));
-
+		
 		//2-tells the computer what to do when it receives an answer from kinesis after receiving the datum
 		//whilst its waiting for the request status it can still compute other processes,i.e.listen another datum
 		Futures.addCallback(f, myCallback);
